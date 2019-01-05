@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+from git_cmd import Git
+from constants import Constants
+
+def get_help():
+    print("Usage: main [DIRECTORY]\n\nCreate a git bundle from current directory or specified directory.")
+
+def check_rel_path(path):
+    if os.path.exists(os.path.realpath(path)):
+        return os.path.realpath(path)
+    return False
+
+def check_path(path):
+    if os.path.exists(os.path.dirname(path)):
+        return True
+    return False
+
+def read_args():
+    if len(sys.argv) == 1:
+        cwd = os.getcwd()
+        return cwd
+    elif len(sys.argv) == 2:
+        if sys.argv[1] == "--help":
+            return False
+        elif check_path(sys.argv[1]):
+            return sys.argv[1]
+        elif check_rel_path(sys.argv[1]):
+            return check_rel_path(sys.argv[1])
+        else:
+            print('Invalid directory specified')
+            return False
+    elif len(sys.argv) > 2:
+        return False
+    else:
+        return False
+
+if __name__ == "__main__":
+    cwd = read_args()
+    if not cwd:
+        get_help()
+        sys.exit()
+
+    # tmp_dir = Git.tmp_dir(cwd)
+
+    if Git.status(cwd) != 0:
+        print("An error occured when performing `git status ...`")
+        sys.exit()
+    if Git.stash_list(cwd) != 0:
+        print("An error occured when performing `git stash list`")
+        sys.exit()
+    Git.tag_refs(cwd) != 0
+    if Git.stash(cwd) != 0:
+        print("An error occured when performing `git stash -u`")
+        sys.exit()
+    Git.tag_ref(Constants.stash_tag_pattern.format("ga-latest"), "stash@{{0}}", cwd)
+    if Git.bundle(cwd) != 0:
+        print("An error occured when performing `git bundle ...`")
+        sys.exit()
+    Git.del_tag_refs(cwd)
