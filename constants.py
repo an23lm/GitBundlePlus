@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 class Constants:
     stash_tag_pattern = "ga-stash-tag-{{{}}}"
