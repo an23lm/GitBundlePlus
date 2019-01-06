@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-from constants import Constants
+from .constants import Constants
 
 class Git:
 

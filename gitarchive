@@ -2,8 +2,8 @@
 
 import sys
 import os
-from git_cmd import Git
-from constants import Constants
+from modules.git_cmd import Git
+from modules.constants import Constants
 import argparse
 
 def dir_path(string):
