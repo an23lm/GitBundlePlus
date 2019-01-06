@@ -5,6 +5,6 @@ lib/
 .vscode
 .Python
 .DS_Store
-Git_Archive.egg-info/
 build/
 dist/
+Git_Bundle_Plus.egg-info/
