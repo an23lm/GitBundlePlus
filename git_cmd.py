@@ -34,7 +34,7 @@ class Git:
     
     @staticmethod
     def stash(path):
-        cmdstring = ['cd {}; git stash -u'.format(path)]
+        cmdstring = ['cd {}; git stash -u | grep "No .*"'.format(path)]
         cmd = subprocess.Popen(cmdstring, shell=True, stdout=subprocess.PIPE)
         cmd.wait()
         return cmd.returncode
@@ -69,8 +69,9 @@ class Git:
         return cmd.returncode
 
     @staticmethod
-    def del_tag_refs(path):
-        Git.del_tag_ref(Constants.stash_tag_pattern.format(Constants.stash_tag_latest), path)
+    def del_tag_refs(path, stashcode):
+        if stashcode == 0:
+            Git.del_tag_ref(Constants.stash_tag_pattern.format(Constants.stash_tag_latest), path)
         for idx in range(len(Git.stashlist)):
            Git.del_tag_ref(Constants.stash_tag_pattern.format(idx), path)
     

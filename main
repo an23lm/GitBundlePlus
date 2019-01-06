@@ -26,11 +26,10 @@ if __name__ == "__main__":
         print("An error occured when performing `git stash list`")
         sys.exit()
     Git.tag_refs(cwd) != 0
-    if Git.stash(cwd) != 0:
-        print("An error occured when performing `git stash -u`")
-        sys.exit()
-    Git.tag_ref(Constants.stash_tag_pattern.format("ga-latest"), "stash@{{0}}", cwd)
+    stashcode = Git.stash(cwd)
+    if stashcode == 0:
+        Git.tag_ref(Constants.stash_tag_pattern.format("ga-latest"), "stash@{{0}}", cwd)
     if Git.bundle(cwd) != 0:
         print("An error occured when performing `git bundle ...`")
         sys.exit()
-    Git.del_tag_refs(cwd)
+    Git.del_tag_refs(cwd, stashcode)
