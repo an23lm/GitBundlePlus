@@ -14,7 +14,7 @@ def dir_path(string):
 
 if __name__ == "__main__":
     default_dir = os.getcwd()
-    parser = argparse.ArgumentParser(description="Bundle a local Git project with all uncommited changes and stashes.")
+    parser = argparse.ArgumentParser(description="Bundle a local Git project with all uncommitted changes and stashes.")
     parser.add_argument("path", help="Git directory to archive", type=dir_path, default=default_dir)
     args = parser.parse_args()
     cwd = os.path.realpath(args.path)
