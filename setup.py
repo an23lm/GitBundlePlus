@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='Git Bundle Plus',  
-     version='0.9',
+     version='0.9.1',
      author="Ansèlm Joseph",
      author_email="anselmjosephs@gmail.com",
      description="Bundle a local Git project with all uncommitted changes and stashes (git bundle on steroids).",
