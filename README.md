@@ -7,7 +7,7 @@ Bundle a local git project with all uncommitted changes, unstaged files, and sta
 - [Installation](#inst)
 - [Usage](#usage)
 - [Example](#ex)
-- [**.bundle** output + retrive git project](#output)
+- [**.bundle** output + retrieve git project](#output)
 - [How it works](#works)
 - [Like](#love)
 - [Contributers](#con1)
@@ -67,7 +67,7 @@ git stash apply ga-stash-tag-{ga-latest}
 ```
 
 <a name="output"></a>
-## `.bundle` output + retrive git project 📦
+## `.bundle` output + retrieve git project 📦
 `<git-folder-name>.bundle` will be created in the git folder specified.
 
 ### To unbundle the bundled git project, clone the bundle.
